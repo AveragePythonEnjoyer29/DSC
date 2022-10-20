@@ -1,7 +1,7 @@
 import requests, json, sys, time
 from os.path import exists, isdir, isfile, join
 from os import walk
-from random import uniform
+from random import uniform, shuffle
 from colorama import Fore, init
 
 init(autoreset=True)
@@ -96,13 +96,27 @@ if __name__ == '__main__':
     args = sys.argv[1:]
     running = True
 
+    shuffle_lines = False
+    if '--shuffle' in args or '--s' in args:
+        shuffle_lines = True
+
     # parse arguments
     lines = []
     for arg in args:
-        lines += parse(arg)
+        if not arg.startswith('--'):
+            lines += parse(arg)
     
-    print(f'{Fore.GREEN}+{Fore.RESET} Loaded {str(len(lines))} lines.\n')
+    print(f'{Fore.GREEN}+{Fore.RESET} Loaded {str(len(lines))} lines.')
+    if shuffle_lines:
+        shuffle(lines)
+        print(f'{Fore.GREEN}+{Fore.RESET} Shuffle mode enabled')
+
+    print('')
+
     while running:
+        if shuffle_lines:
+            shuffle(lines)
+
         for line in lines:
             try:
                 status = change(line)

@@ -78,15 +78,18 @@ def parse(arg: str) -> list:
 
                     print(f'  {Fore.GREEN}+{Fore.RESET} Parsing file: {file}')
                     with open(fpath) as fd:
-                        [lines.append(line.rstrip()) for line in fd.readlines()]
+                        [lines.append(line.rstrip())
+                         for line in fd.readlines()]
         
         elif isfile(arg):
             print(f'{Fore.GREEN}+{Fore.RESET} Parsing file: {arg}')
             with open(arg) as fd:
-                [lines.append(line.rstrip()) for line in fd.readlines()]
+                [lines.append(line.rstrip())
+                 for line in fd.readlines()]
     else:
         print(f'{Fore.GREEN}+{Fore.RESET} Parsing lines')
-        [lines.append(x) for x in arg.split('|')]
+        [lines.append(x)
+         for x in arg.split('|')]
     
     return lines
 
@@ -103,7 +106,7 @@ if __name__ == '__main__':
     # parse arguments
     lines = []
     for arg in args:
-        if not arg.startswith('--'):
+        if not arg.startswith('--'): # skips arguments
             lines += parse(arg)
     
     print(f'{Fore.GREEN}+{Fore.RESET} Loaded {str(len(lines))} lines.')
@@ -112,7 +115,6 @@ if __name__ == '__main__':
         print(f'{Fore.GREEN}+{Fore.RESET} Shuffle mode enabled')
 
     print('')
-
     while running:
         if shuffle_lines:
             shuffle(lines)
@@ -127,7 +129,7 @@ if __name__ == '__main__':
                 else:
                     print(f'{Fore.RED}-{Fore.RESET} Failed to change status to: {line}')
 
-                time.sleep(uniform(3, 7))
+                time.sleep(uniform(4, 8))
 
             except KeyboardInterrupt:
                 running = False; break

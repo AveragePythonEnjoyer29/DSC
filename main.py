@@ -70,7 +70,7 @@ def parse(arg: str) -> list:
     lines = []
     if exists(arg):
         if isdir(arg):
-            print(f'{Fore.GREEN}{Fore.GREEN}+{Fore.RESET}{Fore.RESET} Parsing directory: {arg}')
+            print(f'{Fore.GREEN}+{Fore.RESET} Parsing directory: {arg}')
 
             for root, _, files in walk(arg):
                 for file in files:
@@ -98,15 +98,17 @@ if __name__ == '__main__':
 
     args = sys.argv[1:]
     running = True
-
     shuffle_lines = False
-    if '--shuffle' in args or '--s' in args:
-        shuffle_lines = True
 
     # parse arguments
     lines = []
     for arg in args:
-        if not arg.startswith('--'): # skips arguments
+
+        # checks for arguments
+        if arg in ['--shuffle', '-s']:
+            shuffle_lines = True
+
+        else:
             lines += parse(arg)
     
     print(f'{Fore.GREEN}+{Fore.RESET} Loaded {str(len(lines))} lines.')

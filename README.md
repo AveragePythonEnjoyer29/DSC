@@ -11,7 +11,7 @@ You can enter files, lines or even directories and DSC will parse all the lines 
 
 ### Installation
 - Clone the repository
-   - `git clone https://github.com/OscarThePythonWizz/DSC`
+   - `git clone https://github.com/sym-p1337/DSC`
 - Install python modules
    - `pip install requirements.txt`
 - Enter your token in `token.txt` (create the file if it doesn't exist)
